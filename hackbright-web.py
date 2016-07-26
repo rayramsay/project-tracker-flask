@@ -5,7 +5,7 @@ import hackbright
 app = Flask(__name__)
 
 
-@app.route("/student")
+@app.route("/search-student")
 def get_student():
     """Show information about a student."""
 
@@ -20,11 +20,32 @@ def get_student():
                             last=last,
                             github=github)
 
-@app.route("/search")
-def get_student_form():
+@app.route("/show-search-form")
+def get_search_student_form():
     """Display search form."""
 
     return render_template("student_search.html")
+
+@app.route("/show-add-form")
+def get_add_student_form():
+    """Display a new student form."""
+    return render_template("student_add.html")
+
+
+@app.route("/add-student", methods=['POST'])
+def add_student():
+    """Add a student to the database."""
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    github = request.form.get('github')
+
+    if fname and lname and github:
+        hackbright.make_new_student(fname, lname, github)
+    else:
+        return "You need to provide all fields."
+
+    return render_template("student_add_success.html",
+        fname=fname, lname=lname, github=github)
 
 
 if __name__ == "__main__":
