@@ -15,10 +15,13 @@ def get_student():
     except:
         return "You need to enter a github user name."
 
+    projects_grades = hackbright.get_grades_by_github(github)
+
     return render_template("student_info.html",
                             first=first,
                             last=last,
-                            github=github)
+                            github=github,
+                            projects_grades=projects_grades)
 
 @app.route("/show-search-form")
 def get_search_student_form():
@@ -39,6 +42,7 @@ def add_student():
     lname = request.form.get('lname')
     github = request.form.get('github')
 
+    # Before adding to database, make sure all fields contain text.
     if fname and lname and github:
         hackbright.make_new_student(fname, lname, github)
     else:
