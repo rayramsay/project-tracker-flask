@@ -27,8 +27,8 @@
         <tbody>
         {% for project, grade in projects_grades %}
             <tr>
-                <td>{{ project }}</td>
-                <td>{{ grade}}</td>
+                <td><a href="/search-project?project_name={{project}}">{{ project }}</a></td>
+                <td>{{ grade }}</td>
             </tr>
         {% endfor %}
         </tbody>
