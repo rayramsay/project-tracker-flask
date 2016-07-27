@@ -2,30 +2,38 @@
 <html>
 <head>
     <title>Student Info</title>
+    <!-- <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"> -->
+    <style type="text/css">
+    th,td{
+        padding:10px;
+        text-align: center;
+    }
+
+    </style>
+
 </head>
 <body>
 <h1>{{ first }} {{ last }}</h1>
 
 <p>GitHub Account: {{ github }}</p>
 
-<table>
-    <thead>
-        <th>Project</th>
-        <th>Grade</th>
-    </thead>
+{% if projects_grades %}
+    <table rules="all" border="1">
+        <thead>
+            <th>Project</th>
+            <th>Grade</th>
+        </thead>
 
-<tbody>
-
-{% for project, grade in projects_grades %}
-<tr>
-    <td>{{ project }}</td>
-    <td>{{ grade}}</td>
-</tr>
-
-{% endfor %}
-
-</tbody>
-</table>
+        <tbody>
+        {% for project, grade in projects_grades %}
+            <tr>
+                <td>{{ project }}</td>
+                <td>{{ grade}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 
 </body>
 </html>
