@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>Student Roster</title>
+    <!-- <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"> -->
+    <style type="text/css">
+    th,td{
+        padding:10px;
+        text-align: center;
+    }
+
+    </style>
+
+</head>
+<body>
+<h1>Students</h1>
+
+{% if students %}
+    <table rules="all" border="1">
+        <thead>
+            <th>Name</th>
+        </thead>
+
+        <tbody>
+        {% for first_name, last_name, github in students %}
+            <tr>
+                <td><a href="/search-student?github={{github}}">{{ first_name }} {{ last_name }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<h1>Projects</h1>
+
+{% if projects %}
+    <table rules="all" border="1">
+        <thead>
+            <th>Name</th>
+        </thead>
+
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td><a href="/search-project?project_name={{project[0]}}">{{ project[0] }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+</body>
+</html>
