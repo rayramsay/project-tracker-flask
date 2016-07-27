@@ -19,5 +19,23 @@
 
 <p><b>Max Grade:</b> {{ max_grade }}</p>
 
+{% if students_grades %}
+    <table rules="all" border="1">
+        <thead>
+            <th>Student</th>
+            <th>Grade</th>
+        </thead>
+
+        <tbody>
+        {% for student, grade in students_grades %}
+            <tr>
+                <td><a href="/search-student?github={{student}}">{{ student }}</a></td>
+                <td>{{ grade }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
 </body>
 </html>
