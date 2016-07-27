@@ -17,6 +17,23 @@ def connect_to_db(app):
     db.app = app
     db.init_app(app)
 
+def get_students():
+    """ Returns a list of tuples (first_name, last_name, github). """
+
+    QUERY = """ SELECT * FROM students """
+    db_cursor = db.session.execute(QUERY)
+    rows = db_cursor.fetchall()
+    return rows
+
+
+def get_projects():
+    """ Returns a list of projects."""
+
+    QUERY = """ SELECT title FROM projects """
+    db_cursor = db.session.execute(QUERY)
+    rows = db_cursor.fetchall()
+    return rows
+
 
 def get_student_by_github(github):
     """Given a github account name, print information about the
@@ -119,6 +136,7 @@ def get_grades_by_title(title):
     return rows
 
 
+
 def handle_input():
     """Main loop.
 
@@ -167,7 +185,7 @@ if __name__ == "__main__":
     app = Flask(__name__)
     connect_to_db(app)
 
-    handle_input()
+    # handle_input()
 
     # To be tidy, we'll close our database connection -- though, since this
     # is where our program ends, we'd quit anyway.
